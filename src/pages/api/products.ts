@@ -3,6 +3,15 @@ import dbConnect from '../../utils/db';
 import Product from '../../models/Product';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Gestion des CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   await dbConnect();
 
   switch (req.method) {
